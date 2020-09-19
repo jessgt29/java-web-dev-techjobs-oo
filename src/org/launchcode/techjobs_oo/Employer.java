@@ -13,7 +13,7 @@ public class Employer {
     }
 
     public Employer(String value) {
-        this();
+        this(); //this() - to invoke current class constructor
         this.value = value;
     }
 
