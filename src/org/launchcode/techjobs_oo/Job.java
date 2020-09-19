@@ -1,5 +1,7 @@
 package org.launchcode.techjobs_oo;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Job {
@@ -11,7 +13,7 @@ public class Job {
     private Employer employer;
     private Location location;
     private PositionType positionType;
-    private CoreCompetency coreCompetency;
+    private Location coreCompetency;
 
     // TODO: Add two constructors - one to initialize a unique ID and a second to initialize the
     //  other five fields. The second constructor should also call the first in order to initialize
@@ -22,7 +24,7 @@ public class Job {
         nextId++;
     }
 
-    public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
+    public Job(String name, Employer employer, Location location, PositionType positionType, Location coreCompetency) {
         this();
         this.name = name;
         this.employer = employer;
@@ -84,11 +86,39 @@ public class Job {
         this.positionType = positionType;
     }
 
-    public CoreCompetency getCoreCompetency() {
+    public Location getCoreCompetency() {
         return coreCompetency;
     }
 
-    public void setCoreCompetency(CoreCompetency coreCompetency) {
+    public void setCoreCompetency(Location coreCompetency) {
         this.coreCompetency = coreCompetency;
+    }
+
+    @Override
+    public String toString(){
+        if (name == null && employer == null && location == null && positionType == null && coreCompetency == null){
+            return "OOPS! This job does not seem to exist.";
+        }
+        else {
+            HashMap<String, Object> displayJob = new HashMap<>();
+            displayJob.put("Name: ", name);
+            displayJob.put("Employer: ", employer);
+            displayJob.put("Location: ", location);
+            displayJob.put("Position Type: ", positionType);
+            displayJob.put("Core Competency: ", coreCompetency);
+
+            String result = "\nID: " + id;
+            for (Map.Entry<String, Object> properties : displayJob.entrySet())
+            {
+                result += "\n" + properties.getKey();
+                if(properties.getValue().toString() == ""){ //used toString because value was Object type;
+                    result += "Data not available";
+                }else{
+                    result += properties.getValue();
+                }
+            }
+            result += "\n";
+            return result;
+        }
     }
 }
